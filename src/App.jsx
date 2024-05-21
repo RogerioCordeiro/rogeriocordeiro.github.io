@@ -6,12 +6,15 @@ function App() {
 
   return (
     <>
-      <div>
-        <a className="logo" href="https://rogeriocordeiro.github.io/my-page/">
+
+        <a className="logo page" href="https://rogeriocordeiro.github.io/my-page/">
+          <h1>Minha Página</h1>
+        </a>
+        <a className="logo repo" href="https://github.com/RogerioCordeiro?tab=repositories" target='blank'>
           <h1>Meu repositório</h1>
         </a>
-      </div>
-      <h1>Minha Pagina Inicial</h1>
+
+      <h1>Bem vindo(a) a homepage!</h1>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           Contador é {count}

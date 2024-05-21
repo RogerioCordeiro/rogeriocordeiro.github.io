@@ -17,7 +17,9 @@ a {
   font-weight: 500;
   color: #ffffff;
   text-decoration: inherit;
-
+}
+a.page:hover {
+  color:rgb(55,156,253);
 }
 a:hover {
   color: rgb(55,253, 156);
