@@ -1,9 +1,11 @@
 import './App.css'
+import Header from './Header.jsx'
 
 function App() {
 
   return (
     <>
+    <Header></Header>
       <h1>Bem vindo(a)!</h1>
       <a className="page" href="https://rogeriocordeiro.github.io/my-page/">
         <p>Minha Página</p>
