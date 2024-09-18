@@ -1,24 +1,27 @@
-function NavBar() {
+import styles from './Navbar.module.css'
+import logo from '../img/RACS.png'
+
+function Navbar() {
 
     return (
-<nav>
-    <div>
-        <div>
-            <a href="#"><img src="RACS" alt="logo-img" /></a>
-        </div>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Home</a></li>
-        </ul>
-        <div>
-            <a href="#">Sign In</a>
-            <a href="#">Register</a>
-        </div>
-    </div>
-</nav>
+        <header className={styles.container}>
+            <nav className={styles.navbar}>
+                <div className={styles.navbarImg}>
+                    <a href="#"><img src={logo} alt="RACS" title='Rogerio Aparecido' /></a>
+                </div>
+                <ul className={styles.navbarLinks}>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Sobre Min</a></li>
+                    <li><a href="#">Protfólio</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+                <div className={styles.navbarButtons}>
+                    <a className={styles.navbarSignIn} href="#">Sign In</a>
+                    <a className={styles.navbarRegister} href="#">Register</a>
+                </div>
+            </nav>
+        </header>
     )
 }
 
-export default NavBar
+export default Navbar
