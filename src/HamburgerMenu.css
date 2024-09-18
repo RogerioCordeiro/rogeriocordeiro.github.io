@@ -1,0 +1,57 @@
+.hamburger-menu {
+    position: relative;
+    right: 40px;
+  }
+  
+  .menu-icon {
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  .menu-icon .bar1, .menu-icon .bar2, .menu-icon .bar3 {
+    width: 35px;
+    height: 2px;
+    background-color: #000000;
+    margin: 6px 0;
+    transition: 0.4s;
+  }
+  
+  .menu-icon.open .bar1 {
+    transform: rotate(-45deg) translate(-2px, 4px);
+  }
+  
+  .menu-icon.open .bar2 {
+    opacity: 0;
+  }
+  
+  .menu-icon.open .bar3 {
+    transform: rotate(45deg) translate(-8px, -8px);
+  }
+  
+  .menu-content {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 40px;
+    right: 50%; /* Ajuste essa distância conforme necessário */
+    width: 80px; /* Você pode ajustar essa largura conforme necessário */
+    text-align: left;
+    z-index: 1;
+  }
+  
+  .menu-content a {
+    padding: 10px 15px;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    display: block;
+  }
+  
+  .menu-content a:hover {
+    background-color: #000000;
+    color: #ffffff;
+  }
+  
+  .menu-content.show {
+    display: flex;
+  }
+  
