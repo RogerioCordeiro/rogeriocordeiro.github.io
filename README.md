@@ -181,7 +181,7 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 
 - Portfolio: https://rogeriocordeiro.github.io/
 - GitHub: [@RogerioCordeiro](https://github.com/RogerioCordeiro)
-- Email: [seu-email@exemplo.com](mailto:seu-email@exemplo.com)
+- Email: [seu-email@exemplo.com](mailto:rocordeirosilva@gmail.com)
 
 ---
 
