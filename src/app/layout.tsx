@@ -24,7 +24,7 @@ export default function RootLayout({
         <ThemeProvider>
           <div className="h-screen flex flex-col">
             <PortfolioHeader />
-            <div className="flex-1 relative">
+            <div className="flex-1 relative transition-container">
               <PageTransition>{children}</PageTransition>
             </div>
             <SectionNavigation />
