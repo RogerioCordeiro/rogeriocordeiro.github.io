@@ -6,7 +6,21 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "export": "next build",
+    "deploy": "next build && touch out/.nojekyll",
+    "changelog:gen": "node scripts/changelog.js generate",
+    "changelog:release": "node scripts/changelog.js release",
+    "changelog:release:minor": "node scripts/changelog.js release minor",
+    "changelog:release:major": "node scripts/changelog.js release major",
+    "changelog:tag": "node scripts/changelog.js tag",
+    "version:patch": "node scripts/changelog.js release patch",
+    "version:minor": "node scripts/changelog.js release minor",
+    "version:major": "node scripts/changelog.js release major",
+    "release": "./scripts/release.sh",
+    "release:patch": "./scripts/release.sh patch",
+    "release:minor": "./scripts/release.sh minor",
+    "release:major": "./scripts/release.sh major"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

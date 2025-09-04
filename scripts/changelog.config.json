@@ -1,0 +1,129 @@
+{
+    "repository": {
+        "owner": "RogerioCordeiro",
+        "name": "rogeriocordeiro.github.io"
+    },
+    "categories": {
+        "breaking": {
+            "title": "BREAKING CHANGES",
+            "keywords": [
+                "breaking",
+                "break",
+                "major"
+            ]
+        },
+        "features": {
+            "title": "Features",
+            "keywords": [
+                "feat",
+                "feature",
+                "add",
+                "new",
+                "implement"
+            ]
+        },
+        "fixes": {
+            "title": "Bug Fixes",
+            "keywords": [
+                "fix",
+                "bug",
+                "error",
+                "issue",
+                "patch"
+            ]
+        },
+        "performance": {
+            "title": "Performance",
+            "keywords": [
+                "perf",
+                "performance",
+                "optimize",
+                "speed"
+            ]
+        },
+        "refactor": {
+            "title": "Refactoring",
+            "keywords": [
+                "refactor",
+                "refact",
+                "restructure",
+                "cleanup"
+            ]
+        },
+        "styling": {
+            "title": "Styling",
+            "keywords": [
+                "style",
+                "css",
+                "ui",
+                "design",
+                "theme",
+                "color"
+            ]
+        },
+        "docs": {
+            "title": "Documentation",
+            "keywords": [
+                "doc",
+                "docs",
+                "readme",
+                "comment",
+                "guide"
+            ]
+        },
+        "tests": {
+            "title": "Tests",
+            "keywords": [
+                "test",
+                "spec",
+                "jest",
+                "cypress",
+                "e2e"
+            ]
+        },
+        "chores": {
+            "title": "Chores",
+            "keywords": [
+                "chore",
+                "deps",
+                "dependency",
+                "config",
+                "setup",
+                "build"
+            ]
+        },
+        "ci": {
+            "title": "CI/CD",
+            "keywords": [
+                "ci",
+                "cd",
+                "deploy",
+                "pipeline",
+                "github",
+                "action"
+            ]
+        },
+        "security": {
+            "title": "Security",
+            "keywords": [
+                "security",
+                "secure",
+                "vulnerability",
+                "auth",
+                "permission"
+            ]
+        }
+    },
+    "template": {
+        "header": "# Changelog\n\nTodas as alterações notáveis deste projeto serão documentadas neste arquivo.\n\nO formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/),\ne este projeto adere ao [Semantic Versioning](https://semver.org/spec/v2.0.0.html).",
+        "footer": "\n---\n\n**Legenda:**\n- **BREAKING CHANGES**: Alterações que quebram compatibilidade\n- **Features**: Novas funcionalidades\n- **Bug Fixes**: Correções de bugs\n- **Performance**: Melhorias de performance\n- **Refactoring**: Refatoração de código\n- **Styling**: Alterações de estilo e UI\n- **Documentation**: Atualizações de documentação\n- **Tests**: Adição ou correção de testes\n- **Chores**: Tarefas de manutenção e configuração\n- **CI/CD**: Integração e deploy contínuo\n- **Security**: Correções de segurança\n- **Others**: Outras alterações"
+    },
+    "options": {
+        "includeAuthor": false,
+        "includeDate": true,
+        "includeHash": true,
+        "linkToCommit": true,
+        "groupByType": true,
+        "sortByDate": true
+    }
+}
