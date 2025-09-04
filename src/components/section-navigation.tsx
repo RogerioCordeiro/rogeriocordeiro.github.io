@@ -1,23 +1,33 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
 const sections = [
-  { id: "hero", label: "Início", index: 0 },
-  { id: "apis", label: "APIs", index: 1 },
-  { id: "sites", label: "Sites", index: 2 },
-  { id: "games", label: "Jogos", index: 3 },
-  { id: "contact", label: "Contato", index: 4 },
+  { id: "hero", label: "Início", path: "/", index: 0 },
+  { id: "apis", label: "APIs", path: "/apis", index: 1 },
+  { id: "sites", label: "Sites", path: "/sites", index: 2 },
+  { id: "games", label: "Jogos", path: "/games", index: 3 },
+  { id: "contact", label: "Contato", path: "/contact", index: 4 },
 ];
 
 export function SectionNavigation() {
+  const pathname = usePathname();
   const [activeSection, setActiveSection] = useState(0);
+
+  useEffect(() => {
+    const currentSection = sections.find(
+      (section) => section.path === pathname
+    );
+    if (currentSection) {
+      setActiveSection(currentSection.index);
+    }
+  }, [pathname]);
 
   const scrollToSection = (index: number) => {
     if ((window as any).navigateToSection) {
       (window as any).navigateToSection(index);
-      setActiveSection(index);
     }
   };
 

@@ -63,7 +63,7 @@ export function ApisSection() {
   ];
 
   return (
-    <div className="w-full min-h-[calc(100vh-4rem)] flex flex-col justify-center bg-muted/30 py-12">
+    <div className="w-full h-full flex flex-col justify-center py-12">
       <div className="container px-4 md:px-6 max-w-7xl mx-auto">
         <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
