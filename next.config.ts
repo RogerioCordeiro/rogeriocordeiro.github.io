@@ -6,8 +6,9 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
-  basePath: process.env.NODE_ENV === 'production' ? '/rogeriocordeiro.github.io' : '',
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/rogeriocordeiro.github.io/' : '',
+  // Para repositórios username.github.io, não precisa de basePath
+  // basePath: process.env.NODE_ENV === 'production' ? '/rogeriocordeiro.github.io' : '',
+  // assetPrefix: process.env.NODE_ENV === 'production' ? '/rogeriocordeiro.github.io/' : '',
 };
 
 export default nextConfig;
