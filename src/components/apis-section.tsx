@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { OptimizedImage } from "@/components/optimized-image";
 
 const ExternalLinkIcon = () => (
   <svg
@@ -82,10 +83,10 @@ export function ApisSection() {
             >
               <CardHeader className="pb-3">
                 <div className="aspect-video rounded-lg overflow-hidden bg-muted">
-                  <img
-                    src={api.gifUrl || "/placeholder.svg"}
+                  <OptimizedImage
+                    src={api.gifUrl}
                     alt={`Demo da ${api.title}`}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
                 <CardTitle className="text-lg">{api.title}</CardTitle>

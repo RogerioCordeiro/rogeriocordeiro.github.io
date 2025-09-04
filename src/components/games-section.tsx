@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { OptimizedImage } from "@/components/optimized-image";
 
 const GithubIcon = () => (
   <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
@@ -77,10 +78,10 @@ export function GamesSection() {
             >
               <CardHeader className="pb-3">
                 <div className="aspect-video rounded-lg overflow-hidden bg-muted relative">
-                  <img
-                    src={game.trailerUrl || "/placeholder.svg"}
+                  <OptimizedImage
+                    src={game.trailerUrl}
                     alt={`Trailer do ${game.title}`}
-                    className="w-full h-full object-cover"
+                    className=""
                   />
                   <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <Button

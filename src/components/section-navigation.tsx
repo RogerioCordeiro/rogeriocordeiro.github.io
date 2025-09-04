@@ -1,65 +1,45 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { cn } from "@/lib/utils"
+import { useState, useEffect } from "react";
+import { cn } from "@/lib/utils";
 
 const sections = [
-  { id: "hero", label: "Início" },
-  { id: "apis", label: "APIs" },
-  { id: "sites", label: "Sites" },
-  { id: "games", label: "Jogos" },
-  { id: "contact", label: "Contato" },
-]
+  { id: "hero", label: "Início", index: 0 },
+  { id: "apis", label: "APIs", index: 1 },
+  { id: "sites", label: "Sites", index: 2 },
+  { id: "games", label: "Jogos", index: 3 },
+  { id: "contact", label: "Contato", index: 4 },
+];
 
 export function SectionNavigation() {
-  const [activeSection, setActiveSection] = useState("hero")
+  const [activeSection, setActiveSection] = useState(0);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id)
-          }
-        })
-      },
-      { threshold: 0.5 },
-    )
-
-    sections.forEach(({ id }) => {
-      const element = document.getElementById(id)
-      if (element) observer.observe(element)
-    })
-
-    return () => observer.disconnect()
-  }, [])
-
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
+  const scrollToSection = (index: number) => {
+    if ((window as any).navigateToSection) {
+      (window as any).navigateToSection(index);
+      setActiveSection(index);
     }
-  }
+  };
 
   return (
     <nav className="fixed right-6 top-1/2 z-50 -translate-y-1/2 space-y-3">
-      {sections.map(({ id, label }) => (
+      {sections.map(({ id, label, index }) => (
         <button
           key={id}
-          onClick={() => scrollToSection(id)}
+          onClick={() => scrollToSection(index)}
           className={cn(
             "group relative block h-3 w-3 rounded-full border-2 transition-all duration-300",
-            activeSection === id
-              ? "border-primary bg-primary scale-125"
-              : "border-muted-foreground/30 bg-transparent hover:border-primary/50 hover:scale-110",
+            activeSection === index
+              ? "border-primary bg-primary scale-125 glow-effect"
+              : "border-muted-foreground/30 bg-transparent hover:border-primary/50 hover:scale-110"
           )}
           aria-label={`Ir para ${label}`}
         >
-          <span className="absolute right-6 top-1/2 -translate-y-1/2 whitespace-nowrap rounded bg-background/90 px-2 py-1 text-xs font-medium opacity-0 transition-opacity duration-200 group-hover:opacity-100 backdrop-blur-sm border">
+          <span className="absolute right-6 top-1/2 -translate-y-1/2 whitespace-nowrap rounded backdrop-elegant px-3 py-2 text-xs font-medium opacity-0 transition-all duration-300 group-hover:opacity-100">
             {label}
           </span>
         </button>
       ))}
     </nav>
-  )
+  );
 }
