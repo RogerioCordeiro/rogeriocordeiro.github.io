@@ -6,6 +6,19 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.
 e este projeto adere ao [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+
+## [1.0.1] - 2025-09-04
+
+### Features
+
+- feat: atualizar versão do projeto para 1.0.0 no package.json ([bb7afe6](https://github.com/RogerioCordeiro/rogeriocordeiro.github.io/commit/bb7afe6))
+
+### Bug Fixes
+
+- refactor: remover comentários desnecessários sobre basePath e assetPrefix ([b129645](https://github.com/RogerioCordeiro/rogeriocordeiro.github.io/commit/b129645))
+- fix: corrigir configuração do Next.js para GitHub Pages ([d35dceb](https://github.com/RogerioCordeiro/rogeriocordeiro.github.io/commit/d35dceb))
+
+
 ## [1.0.0] - 2025-09-04
 
 ### Features

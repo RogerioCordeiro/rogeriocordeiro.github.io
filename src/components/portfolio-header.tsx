@@ -83,7 +83,7 @@ export function PortfolioHeader() {
             className="hover:glow-effect"
           >
             <a
-              href="https://github.com"
+              href="https://github.com/RogerioCordeiro"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -98,7 +98,7 @@ export function PortfolioHeader() {
             className="hover:glow-effect"
           >
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/rogerio-ap-cordeiro/"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -112,7 +112,7 @@ export function PortfolioHeader() {
             asChild
             className="hover:glow-effect"
           >
-            <a href="mailto:contato@exemplo.com">
+            <a href="mailto:rocordeirosilva@gmail.com">
               <MailIcon />
               <span className="sr-only">Email</span>
             </a>
