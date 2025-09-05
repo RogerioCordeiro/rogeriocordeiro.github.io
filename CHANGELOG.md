@@ -9,6 +9,23 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 
 
+
+## [1.1.0] - 2025-09-05
+
+### Features
+
+- feat: add ThemeLogo component for responsive theming support ([7e130f6](https://github.com/RogerioCordeiro/rogeriocordeiro.github.io/commit/7e130f6))
+
+### Bug Fixes
+
+- fix: atualizar links de redes sociais e email no cabeçalho do portfólio ([699f262](https://github.com/RogerioCordeiro/rogeriocordeiro.github.io/commit/699f262))
+
+### Refactoring
+
+- refactor: melhorar a estrutura do cabeçalho e rodapé para melhor responsividade ([c8864f3](https://github.com/RogerioCordeiro/rogeriocordeiro.github.io/commit/c8864f3))
+- refactor: alterar layout do site para uma pagina mais simples por enquanto. ([89a33e7](https://github.com/RogerioCordeiro/rogeriocordeiro.github.io/commit/89a33e7))
+
+
 ## [1.0.2] - 2025-09-05
 
 ### Bug Fixes
