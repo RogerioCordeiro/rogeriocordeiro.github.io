@@ -6,7 +6,29 @@ Este documento explica como funciona o novo sistema de deploy automatizado com v
 
 O workflow de deploy foi aprimorado para incluir:
 
-1. **Versionamento Automático**: Baseado no título do Pull Request
+1.## 🚨 Troubleshooting
+
+### Problema: Workflow rodando para merge em branch errado
+
+- **Causa**: PR mergeado para develop/staging ao invés de main
+- **Solução**: O workflow agora só roda para PRs mergeadas para main/master
+- **Verificação**: Confirmar que `github.event.pull_request.base.ref == 'main'`
+
+### Problema: Versão não foi incrementada
+
+- **Causa**: Título da PR não segue convenção
+- **Solução**: Usar padrões `tipo:`, `tipo!:` ou `tipo!!:`
+
+### Problema: Changelog vazio
+
+- **Causa**: Não há commits novos desde a última tag
+- **Solução**: Verificar se há commits para processar
+
+### Problema: Falha no deploy
+
+- **Causa**: Erro no build ou configuração de Pages
+- **Solução**: Verificar logs do job de build Automático\*\*: Baseado no título do Pull Request
+
 2. **Geração de Changelog**: Automática baseada nos commits
 3. **Tags e Releases**: Criação automática no GitHub
 4. **Deploy Contínuo**: Para GitHub Pages
@@ -15,10 +37,13 @@ O workflow de deploy foi aprimorado para incluir:
 
 ### Triggers
 
-O workflow é executado em dois cenários:
+O workflow é executado em cenários específicos:
 
-1. **Push direto na main/master**: Apenas faz o build e deploy
-2. **Pull Request mergeado**: Executa todo o fluxo de release + deploy
+1. **Push direto na main/master**: Apenas faz o build e deploy (sem versionamento)
+2. **Pull Request mergeado PARA main/master**: Executa todo o fluxo de release + deploy
+3. **Pull Request mergeado para outros branches**: NÃO executa (ex: feature → develop)
+
+> ⚠️ **Importante**: O workflow só roda para PRs mergeadas diretamente na branch main ou master. Merges para branches intermediários como develop/staging não disparam o workflow.
 
 ### Padrões de Título de PR
 
@@ -181,6 +206,38 @@ O workflow requer:
    - Gera changelog
    - Cria release
    - Faz deploy
+
+### Fluxos de Trabalho Suportados
+
+#### Fluxo Direto (Feature → Main) ✅
+
+```mermaid
+feature → main (PR + merge)
+         ↓
+    📋 Release automático + Deploy
+```
+
+#### Fluxo com Branch Intermediário ✅
+
+```mermaid
+feature → develop (PR + merge) ❌ Não dispara workflow
+develop → main (PR + merge)    ✅ Dispara release + deploy
+```
+
+#### Fluxo GitFlow ✅
+
+```mermaid
+feature → develop ❌ Não dispara
+develop → release ❌ Não dispara
+release → main    ✅ Dispara release + deploy
+```
+
+### Exemplos de Cenários
+
+1. **Merge feature → develop**: Workflow NÃO roda
+2. **Merge develop → main**: Workflow roda completo (release + deploy)
+3. **Push direto na main**: Apenas build + deploy (sem release)
+4. **Merge hotfix → main**: Workflow roda completo (release + deploy)
 
 ### Para Releases de Emergência
 
