@@ -7,8 +7,8 @@ export function HeroSection() {
       id="sobre"
       className="min-h-screen flex justify-center items-center relative py-20 md:py-28 bg-gradient-to-br from-background via-background to-muted/20"
     >
-      <div className="container px-4 md:px-6">
-        <div className="flex flex-col items-center space-y-8 text-center">
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="flex flex-col items-center space-y-8 text-center max-w-5xl mx-auto">
           <div className="space-y-4">
             <div className="flex items-center justify-center space-x-2 text-sm text-muted-foreground">
               <Server className="h-4 w-4" />

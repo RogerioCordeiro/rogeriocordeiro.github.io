@@ -7,8 +7,8 @@ import { Github, Linkedin, Mail } from "lucide-react";
 
 export function PortfolioHeader() {
   return (
-    <header className="flex justify-center sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center justify-between">
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
         <div className="flex items-center space-x-2">
           <div className="h-8 w-8 rounded-full">
             <ThemeLogo srcLogo="/logoRo.svg" width={32} height={32} />
