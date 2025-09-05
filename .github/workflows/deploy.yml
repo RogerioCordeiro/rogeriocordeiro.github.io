@@ -3,23 +3,190 @@ name: Deploy Next.js to GitHub Pages
 on:
   push:
     branches: [main, master]
+  pull_request:
+    types: [closed]
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
+  pull-requests: read
 
 concurrency:
   group: "pages"
   cancel-in-progress: false
 
 jobs:
-  build:
+  # Job para versionamento automático (apenas em PRs mergeadas)
+  version-and-release:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.set_version.outputs.VERSION }}
+      should_deploy: ${{ steps.set_version.outputs.SHOULD_DEPLOY }}
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Get last tag
+        id: last_tag
+        run: |
+          git fetch --tags
+          TAG=$(git tag --sort=-v:refname | grep '^v' | head -n 1)
+          echo "Última tag: $TAG"
+          echo "TAG=$TAG" >> $GITHUB_OUTPUT
+
+      - name: Define next version based on commit type
+        id: set_version
+        run: |
+          TITLE="${{ github.event.pull_request.title }}"
+          TAG="${{ steps.last_tag.outputs.TAG }}"
+          echo "🔍 Título da PR: $TITLE"
+
+          # Tag padrão se não houver nenhuma
+          if [ -z "$TAG" ]; then
+            TAG="v1.0.0"
+          fi
+
+          # Extrair partes da tag
+          MAJOR=$(echo "$TAG" | cut -d. -f1 | tr -d 'v')
+          MINOR=$(echo "$TAG" | cut -d. -f2)
+          PATCH=$(echo "$TAG" | cut -d. -f3)
+
+          # Remove espaços e deixa lowercase
+          CLEAN_TITLE=$(echo "$TITLE" | tr -d '[:space:]' | tr '[:upper:]' '[:lower:]')
+
+          # Determinar versão com base no padrão
+          if echo "$CLEAN_TITLE" | grep -Eq '^[a-z]+!!:'; then
+            echo "🔺 Commit com breaking change (!!) – atualizando MAJOR"
+            MAJOR=$((MAJOR + 1))
+            MINOR=0
+            PATCH=0
+            VERSION_TYPE="major"
+          elif echo "$CLEAN_TITLE" | grep -Eq '^[a-z]+!:'; then
+            echo "🔹 Commit com flag de feature (!) – atualizando MINOR"
+            MINOR=$((MINOR + 1))
+            PATCH=0
+            VERSION_TYPE="minor"
+          elif echo "$CLEAN_TITLE" | grep -Eq '^[a-z]+:'; then
+            echo "🔸 Commit padrão – atualizando PATCH"
+            PATCH=$((PATCH + 1))
+            VERSION_TYPE="patch"
+          else
+            echo "⚠️ Formato do título não reconhecido. Mantendo versão atual."
+            VERSION=$TAG
+            VERSION_TYPE="none"
+          fi
+
+          if [ "$VERSION_TYPE" != "none" ]; then
+            VERSION="v${MAJOR}.${MINOR}.${PATCH}"
+            echo "🚀 Nova versão calculada: $VERSION"
+            echo "SHOULD_DEPLOY=true" >> $GITHUB_OUTPUT
+          else
+            echo "🚫 Nenhuma alteração de versão necessária"
+            echo "SHOULD_DEPLOY=false" >> $GITHUB_OUTPUT
+          fi
+
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+          echo "VERSION_TYPE=$VERSION_TYPE" >> $GITHUB_OUTPUT
+
+      - name: Update package.json version
+        if: steps.set_version.outputs.VERSION_TYPE != 'none'
+        run: |
+          VERSION_NUMBER=$(echo "${{ steps.set_version.outputs.VERSION }}" | sed 's/^v//')
+          jq --arg version "$VERSION_NUMBER" '.version = $version' package.json > package.json.tmp
+          mv package.json.tmp package.json
+          echo "📦 package.json atualizado para versão $VERSION_NUMBER"
+
+      - name: Generate changelog
+        if: steps.set_version.outputs.VERSION_TYPE != 'none'
+        run: |
+          echo "📝 Gerando changelog..."
+          node scripts/changelog.js generate
+          
+          # Verificar se o CHANGELOG.md foi atualizado
+          if git diff --quiet CHANGELOG.md; then
+            echo "⚠️ Nenhuma alteração no changelog detectada"
+          else
+            echo "✅ Changelog atualizado com sucesso"
+          fi
+
+      - name: Commit changes
+        if: steps.set_version.outputs.VERSION_TYPE != 'none'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Adicionar arquivos modificados
+          git add package.json CHANGELOG.md
+          
+          # Verificar se há mudanças para commit
+          if git diff --staged --quiet; then
+            echo "📝 Nenhuma alteração para commitar"
+          else
+            git commit -m "chore: bump version to ${{ steps.set_version.outputs.VERSION }} and update changelog [skip ci]"
+            git push origin main
+            echo "✅ Alterações commitadas e enviadas"
+          fi
+
+      - name: Create Git tag
+        if: steps.set_version.outputs.VERSION_TYPE != 'none'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag ${{ steps.set_version.outputs.VERSION }}
+          git push origin ${{ steps.set_version.outputs.VERSION }}
+          echo "🏷️ Tag ${{ steps.set_version.outputs.VERSION }} criada"
+
+      - name: Create GitHub release
+        if: steps.set_version.outputs.VERSION_TYPE != 'none'
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.set_version.outputs.VERSION }}
+          name: ${{ steps.set_version.outputs.VERSION }}
+          body: |
+            ## 📋 Release Notes
+            
+            **PR:** #${{ github.event.pull_request.number }}  
+            **Autor:** ${{ github.event.pull_request.user.login }}  
+            **Título:** ${{ github.event.pull_request.title }}
+            
+            ### 📖 Changelog
+            Veja o [CHANGELOG.md](./CHANGELOG.md) para detalhes completos das alterações.
+            
+            ### 🚀 Deploy
+            Esta versão foi automaticamente deployada para [GitHub Pages](${{ github.event.repository.html_url }}).
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # Job de build (roda sempre que há push na main ou quando há release)
+  build:
+    if: always() && (github.event_name == 'push' || github.event.pull_request.merged == true)
+    runs-on: ubuntu-latest
+    needs: [version-and-release]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -61,12 +228,15 @@ jobs:
         with:
           path: ./out
 
+  # Job de deploy (sempre após o build)
   deploy:
+    if: always() && (github.event_name == 'push' || github.event.pull_request.merged == true)
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: build
+    needs: [build]
+    
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
