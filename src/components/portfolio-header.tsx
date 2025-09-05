@@ -1,9 +1,9 @@
 "use client";
 
 import { ThemeToggle } from "@/components/theme-toggle";
+import { ThemeLogo } from "@/components/theme-logo";
 import { Button } from "@/components/ui/button";
 import { Github, Linkedin, Mail } from "lucide-react";
-import Image from "next/image";
 
 export function PortfolioHeader() {
   return (
@@ -11,14 +11,10 @@ export function PortfolioHeader() {
       <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center space-x-2">
           <div className="h-8 w-8 rounded-full">
-            <Image
-              src="/logoRo.svg"
-              alt="Rogerio Cordeiro"
-              width={32}
-              height={32}
-            />
+            <ThemeLogo srcLogo="/logoRo.svg" width={32} height={32} />
           </div>
-          <span className="text-lg font-semibold">Rogerio Cordeiro</span>
+          {/* <span className="text-lg font-semibold">Rogerio Cordeiro</span> */}
+          <ThemeLogo srcLogo="/rogerioCordeiro.svg" width={128} height={32} />
         </div>
 
         <nav className="hidden md:flex items-center space-x-6">

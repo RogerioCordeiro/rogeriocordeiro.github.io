@@ -3,7 +3,10 @@ import { ArrowDown, Code, Database, Server } from "lucide-react";
 
 export function HeroSection() {
   return (
-    <section className="min-h-screen flex justify-center items-center relative py-20 md:py-28 bg-gradient-to-br from-background via-background to-muted/20">
+    <section
+      id="sobre"
+      className="min-h-screen flex justify-center items-center relative py-20 md:py-28 bg-gradient-to-br from-background via-background to-muted/20"
+    >
       <div className="container px-4 md:px-6">
         <div className="flex flex-col items-center space-y-8 text-center">
           <div className="space-y-4">
@@ -30,6 +33,10 @@ export function HeroSection() {
             <div className="flex items-center space-x-2 rounded-full bg-card px-4 py-2 text-sm">
               <Database className="h-4 w-4 text-primary" />
               <span>PostgreSQL</span>
+            </div>
+            <div className="flex items-center space-x-2 rounded-full bg-card px-4 py-2 text-sm">
+              <Database className="h-4 w-4 text-primary" />
+              <span>Prisma</span>
             </div>
             <div className="flex items-center space-x-2 rounded-full bg-card px-4 py-2 text-sm">
               <Server className="h-4 w-4 text-primary" />
