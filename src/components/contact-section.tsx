@@ -102,7 +102,7 @@ export function ContactSection() {
                   asChild
                 >
                   <a
-                    href="https://github.com"
+                    href="https://github.com/RogerioCordeiro"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -116,7 +116,7 @@ export function ContactSection() {
                   asChild
                 >
                   <a
-                    href="https://linkedin.com"
+                    href="https://www.linkedin.com/in/rogerio-ap-cordeiro/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >

@@ -57,7 +57,7 @@ export function PortfolioHeader() {
         <div className="flex items-center space-x-2">
           <Button variant="ghost" size="icon" asChild>
             <a
-              href="https://github.com"
+              href="https://github.com/RogerioCordeiro"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -67,7 +67,7 @@ export function PortfolioHeader() {
           </Button>
           <Button variant="ghost" size="icon" asChild>
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/rogerio-ap-cordeiro/"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -76,7 +76,7 @@ export function PortfolioHeader() {
             </a>
           </Button>
           <Button variant="ghost" size="icon" asChild>
-            <a href="mailto:contato@exemplo.com">
+            <a href="mailto:rocordeirosilva@gmail.com">
               <Mail className="h-4 w-4" />
               <span className="sr-only">Email</span>
             </a>
