@@ -1,10 +1,11 @@
 import type React from "react";
 import type { Metadata } from "next";
-import "./globals.css";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
+import { Analytics } from "@vercel/analytics/next";
 import { ThemeProvider } from "@/components/theme-provider";
-import { PortfolioHeader } from "@/components/portfolio-header";
-import { SectionNavigation } from "@/components/section-navigation";
-import { PageTransition } from "@/components/page-transition";
+import { Suspense } from "react";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Portfolio | Desenvolvedor Fullstack",
@@ -20,16 +21,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR" suppressHydrationWarning>
-      <body className="font-sans antialiased min-h-screen overflow-hidden">
-        <ThemeProvider>
-          <div className="h-screen flex flex-col">
-            <PortfolioHeader />
-            <div className="flex-1 relative transition-container">
-              <PageTransition>{children}</PageTransition>
-            </div>
-            <SectionNavigation />
-          </div>
-        </ThemeProvider>
+      <body
+        className={`font-sans ${GeistSans.variable} ${GeistMono.variable} antialiased`}
+      >
+        <Suspense fallback={null}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        </Suspense>
+        <Analytics />
       </body>
     </html>
   );

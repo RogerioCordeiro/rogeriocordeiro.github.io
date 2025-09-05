@@ -1,9 +1,28 @@
+import { PortfolioHeader } from "@/components/portfolio-header";
 import { HeroSection } from "@/components/hero-section";
+import { ApisSection } from "@/components/apis-section";
+import { SitesSection } from "@/components/sites-section";
+import { GamesSection } from "@/components/games-section";
+import { ContactSection } from "@/components/contact-section";
 
 export default function Home() {
   return (
-    <main className="h-full flex items-center justify-center bg-background">
-      <HeroSection />
-    </main>
+    <div className="min-h-screen bg-background">
+      <PortfolioHeader />
+      <main>
+        <HeroSection />
+        <ApisSection />
+        <SitesSection />
+        <GamesSection />
+        <ContactSection />
+      </main>
+      <footer className="border-t py-6 md:py-0">
+        <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
+          <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
+            © 2024 Portfolio Desenvolvedor. Todos os direitos reservados.
+          </p>
+        </div>
+      </footer>
+    </div>
   );
 }
