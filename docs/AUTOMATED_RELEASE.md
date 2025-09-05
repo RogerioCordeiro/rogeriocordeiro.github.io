@@ -1,8 +1,8 @@
-# Sistema de Release Automatizado 🚀
+# Sistema de Release Automatizado
 
 Este documento explica como funciona o novo sistema de deploy automatizado com versionamento semântico e geração automática de changelog.
 
-## 📋 Visão Geral
+## Visão Geral
 
 O workflow de deploy foi aprimorado para incluir:
 
@@ -11,7 +11,7 @@ O workflow de deploy foi aprimorado para incluir:
 3. **Tags e Releases**: Criação automática no GitHub
 4. **Deploy Contínuo**: Para GitHub Pages
 
-## 🎯 Como Funciona
+## Como Funciona
 
 ### Triggers
 
@@ -24,40 +24,48 @@ O workflow é executado em dois cenários:
 
 O sistema analisa o título do Pull Request para determinar o tipo de versionamento:
 
-#### Breaking Changes (Major) 🔺
+#### Breaking Changes (Major)
+
 ```
 feat!!: adicionar nova API incompatível
 refactor!!: remover endpoint deprecated
 ```
+
 - **Padrão**: `<tipo>!!: <descrição>`
 - **Versão**: `v1.2.3` → `v2.0.0`
 
 #### Features (Minor) 🔹
+
 ```
 feat!: adicionar sistema de comentários
 feature!: implementar dark mode
 ```
+
 - **Padrão**: `<tipo>!: <descrição>`
 - **Versão**: `v1.2.3` → `v1.3.0`
 
-#### Patches (Patch) 🔸
+#### Patches (Patch)
+
 ```
 fix: corrigir bug no header
 docs: atualizar README
 style: ajustar espaçamento
 ```
+
 - **Padrão**: `<tipo>: <descrição>`
 - **Versão**: `v1.2.3` → `v1.2.4`
 
-#### Sem Versionamento ⚠️
+#### Sem Versionamento
+
 ```
 update documentação
 teste de build
 ```
+
 - **Padrão**: Qualquer título que não siga a convenção
 - **Versão**: Mantém a atual, apenas faz deploy
 
-## 📦 Processo de Release
+## Processo de Release
 
 ### 1. Version and Release Job
 
@@ -86,7 +94,7 @@ Executa após o build:
 
 1. **Deploy para GitHub Pages**: Usando artifacts
 
-## 🛠️ Scripts Utilizados
+## Scripts Utilizados
 
 O workflow utiliza o script existente de changelog:
 
@@ -95,26 +103,27 @@ node scripts/changelog.js generate
 ```
 
 Este script:
+
 - Analisa commits desde a última tag
 - Categoriza por tipo (feat, fix, docs, etc.)
 - Gera entrada no CHANGELOG.md
 - Mantém histórico organizado
 
-## 📊 Outputs e Informações
+## Outputs e Informações
 
 ### Logs do Workflow
 
 O workflow produz logs detalhados:
 
 ```
-🔍 Título da PR: feat!: adicionar sistema de comentários
-🔹 Commit com flag de feature (!) – atualizando MINOR
-🚀 Nova versão calculada: v1.3.0
-📦 package.json atualizado para versão 1.3.0
-📝 Gerando changelog...
-✅ Changelog atualizado com sucesso
-✅ Alterações commitadas e enviadas
-🏷️ Tag v1.3.0 criada
+Título da PR: feat!: adicionar sistema de comentários
+Commit com flag de feature (!) – atualizando MINOR
+Nova versão calculada: v1.3.0
+package.json atualizado para versão 1.3.0
+Gerando changelog...
+Changelog atualizado com sucesso
+Alterações commitadas e enviadas
+Tag v1.3.0 criada
 ```
 
 ### Release Notes Automáticas
@@ -126,38 +135,43 @@ Cada release inclui:
 - **Status do Deploy**: Confirmação automática
 - **Release Notes**: Geradas automaticamente pelo GitHub
 
-## 🎨 Personalizações
+## Personalizações
 
 ### Configuração do Changelog
 
 O comportamento pode ser ajustado em:
+
 - `scripts/changelog.config.json`
 - `scripts/changelog.js`
 
 ### Permissões Necessárias
 
 O workflow requer:
+
 - `contents: write` - Para commits e tags
 - `pages: write` - Para deploy
 - `id-token: write` - Para autenticação
 - `pull-requests: read` - Para informações da PR
 
-## 🔄 Fluxo de Trabalho Recomendado
+## Fluxo de Trabalho Recomendado
 
 ### Para Desenvolvedores
 
 1. **Criar Feature Branch**:
+
    ```bash
    git checkout -b feat/minha-feature
    ```
 
 2. **Fazer Commits Convencionais**:
+
    ```bash
    git commit -m "feat: adicionar nova funcionalidade"
    git commit -m "fix: corrigir bug encontrado"
    ```
 
 3. **Criar Pull Request** com título seguindo convenção:
+
    ```
    feat!: implementar sistema de autenticação
    ```
@@ -180,7 +194,7 @@ git commit -m "hotfix: correção crítica"
 git push origin main
 ```
 
-## 🎯 Benefícios
+## Benefícios
 
 1. **Automação Completa**: Sem intervenção manual
 2. **Versionamento Consistente**: Seguindo SemVer
@@ -188,40 +202,40 @@ git push origin main
 4. **Rastreabilidade**: Histórico completo de releases
 5. **Deploy Contínuo**: Sempre sincronizado com releases
 
-## ⚠️ Considerações
+## Considerações
 
 - O título da PR é **crucial** para o versionamento correto
 - Commits com `[skip ci]` não disparam o workflow
 - O script de changelog depende da estrutura de commits
 - Tags são imutáveis - cuidado com erros de versionamento
 
-## 🚨 Troubleshooting
+## Troubleshooting
 
 ### Problema: Versão não foi incrementada
+
 - **Causa**: Título da PR não segue convenção
 - **Solução**: Usar padrões `tipo:`, `tipo!:` ou `tipo!!:`
 
 ### Problema: Changelog vazio
+
 - **Causa**: Não há commits novos desde a última tag
 - **Solução**: Verificar se há commits para processar
 
 ### Problema: Falha no deploy
+
 - **Causa**: Erro no build ou configuração de Pages
 - **Solução**: Verificar logs do job de build
 
 ### Problema: Falha ao criar tag
+
 - **Causa**: Tag já existe ou problema de permissões
 - **Solução**: Verificar se a tag é única e se as permissões estão corretas
 
 ---
 
-## 📚 Referências
+## Referências
 
 - [Conventional Commits](https://www.conventionalcommits.org/)
 - [Semantic Versioning](https://semver.org/)
 - [Keep a Changelog](https://keepachangelog.com/)
 - [GitHub Actions](https://docs.github.com/en/actions)
-
----
-
-**Automatizado com ❤️ pelo GitHub Actions**
