@@ -8,6 +8,14 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 
 
+
+## [1.0.2] - 2025-09-05
+
+### Bug Fixes
+
+- fix: ajustar condições de execução do workflow para versionamento e build apenas em PRs para main/master ([b0da600](https://github.com/RogerioCordeiro/rogeriocordeiro.github.io/commit/b0da600))
+
+
 ## [1.0.1] - 2025-09-05
 
 ### Features
