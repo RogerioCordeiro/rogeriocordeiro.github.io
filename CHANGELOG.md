@@ -10,6 +10,14 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 
 
+
+## [1.1.1] - 2025-09-15
+
+### Bug Fixes
+
+- fix: atualizar URLs de jogo para links corretos no componente GamesSection ([43e2ee3](https://github.com/RogerioCordeiro/rogeriocordeiro.github.io/commit/43e2ee3))
+
+
 ## [1.1.0] - 2025-09-05
 
 ### Features
