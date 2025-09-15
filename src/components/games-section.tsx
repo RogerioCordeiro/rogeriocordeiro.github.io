@@ -17,8 +17,8 @@ export function GamesSection() {
         "Jogo de RPG 2D com sistema de combate por turnos, inventário e progressão de personagem.",
       technologies: ["Unity", "C#", "SQLite", "Photon"],
       trailerUrl: "/rpg-game-trailer-gameplay.jpg",
-      playUrl: "#",
-      githubUrl: "#",
+      playUrl: "https://rogeriocordeiro.github.io/tetris/",
+      githubUrl: "https://github.com/RogerioCordeiro/tetris",
     },
     {
       title: "Puzzle Platformer",
@@ -31,8 +31,8 @@ export function GamesSection() {
         "LocalStorage",
       ],
       trailerUrl: "/puzzle-platformer-game-trailer.jpg",
-      playUrl: "#",
-      githubUrl: "#",
+      playUrl: "https://rogeriocordeiro.github.io/tetris/",
+      githubUrl: "https://github.com/RogerioCordeiro/tetris",
     },
     {
       title: "Multiplayer Racing",
@@ -40,8 +40,8 @@ export function GamesSection() {
         "Jogo de corrida multiplayer em tempo real com sistema de ranking e customização.",
       technologies: ["Node.js", "Socket.io", "Three.js", "WebGL"],
       trailerUrl: "/multiplayer-racing-game-trailer.jpg",
-      playUrl: "#",
-      githubUrl: "#",
+      playUrl: "https://rogeriocordeiro.github.io/tetris/",
+      githubUrl: "https://github.com/RogerioCordeiro/tetris",
     },
   ];
 
