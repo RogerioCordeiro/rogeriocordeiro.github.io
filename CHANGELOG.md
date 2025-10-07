@@ -11,6 +11,14 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 
 
+
+## [1.2.0] - 2025-10-07
+
+### Features
+
+- feat: add interactive curriculum visualizer and resume section with skill progress bars, timeline, and project cards ([264adf5](https://github.com/RogerioCordeiro/rogeriocordeiro.github.io/commit/264adf5))
+
+
 ## [1.1.1] - 2025-09-15
 
 ### Bug Fixes
