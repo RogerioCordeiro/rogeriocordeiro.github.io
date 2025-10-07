@@ -3,6 +3,7 @@ import { HeroSection } from "@/components/hero-section";
 import { ApisSection } from "@/components/apis-section";
 import { SitesSection } from "@/components/sites-section";
 import { GamesSection } from "@/components/games-section";
+import { ResumeSection } from "@/components/resume-section";
 import { ContactSection } from "@/components/contact-section";
 
 export default function Home() {
@@ -14,6 +15,7 @@ export default function Home() {
         <ApisSection />
         <SitesSection />
         <GamesSection />
+        <ResumeSection />
         <ContactSection />
       </main>
       <footer className="border-t bg-background">
