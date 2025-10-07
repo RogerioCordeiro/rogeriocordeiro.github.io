@@ -43,6 +43,12 @@ export function PortfolioHeader() {
             Jogos
           </a>
           <a
+            href="#curriculo"
+            className="text-sm font-medium hover:text-primary transition-colors"
+          >
+            Currículo
+          </a>
+          <a
             href="#contato"
             className="text-sm font-medium hover:text-primary transition-colors"
           >
